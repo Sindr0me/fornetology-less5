@@ -1,25 +1,33 @@
 <?php
 
-$content = '{
-  "firstName": "Владимир",
-  "lastName": "Куприянов",
-  "address": "г.Москва, ул. Пушкина,2",
-  "phoneNumber": "+7 985 978 50 30"
-}';
+$json = file_get_contents(__DIR__ . '/json.json');
+$data = json_decode($json, true);
+echo '<pre>';
+print_r($data);
+?>
 
-$json = json_decode($content, true);
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+	
+	<table border="1">
+		<tr>
+			<td>Имя</td>
+			<td>Фамилия</td>
+			<td>Адрес</td>
+			<td>Номер телефона</td>
+		</tr>
+		<?php foreach ($data as $item) : ?>
+		<tr>
+			<td><?= $item ['firstName'] ?></td>
+			<td><?= $item ['lastName'] ?></td>
+			<td><?= $item ['address'] ?></td>
+			<td><?= $item ['phoneNumber'] ?></td>
+		</tr>
+		<?php endforeach; ?>
+	</table>
 
-// echo '<pre>';
-// print_r($json);
-
-$firstname = $json['firstName'];
-$lastname = $json['lastName'];
-$adress = $json['address'];
-$phoneNumber = $json['phoneNumber'];
-
-echo "<table>
-	<tr> <td>Имя:</td> <td>$firstname</td> </tr>
-	<tr> <td>Фамилия:</td> <td>$lastname</td> </tr>
-	<tr> <td>Адрес:</td> <td>$adress</td> </tr>
-	<tr> <td>Телефон:</td> <td>$phoneNumber</td> </tr>
-	</table>";
+</body>
+</html>
